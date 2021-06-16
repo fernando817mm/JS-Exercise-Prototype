@@ -92,7 +92,7 @@ console.log(fernando.stomach);
           + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
   */
   
- function Car(model, milesPerGallon) {
+function Car(model, milesPerGallon) {
   this.model = model;
   this.milesPerGallon = milesPerGallon;
   this.tank = 0;
@@ -141,18 +141,35 @@ console.log(honda);
       - Besides the methods on Person.prototype, babies have the ability to `.play()`:
           + Should return a string "Playing with x", x being the favorite toy.
   */
- function Baby() {
-   
-  }
- 
-  
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age);
+  this.favoriteToy = favoriteToy;
+}
+
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function(){
+  return `Playing with ${this.favoriteToy}.`
+};
+
+const benito = new Baby('Benito', 1, 'bone');
+
+console.log(benito);
+
+benito.eat('kibble');
+benito.eat('pumpkin puree');
+
+console.log(benito);
+
+console.log(benito.play());
+
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
-    1. 
-    2. 
-    3. 
-    4. 
+    1. Window: if 'this' is not assigned to anything then it will return the whole window object.
+    2. Implicit: 'this' is referring to anything left of the '.' example: benito.play() 
+    3. Explicit: .call or .apply must be used or 'this' won't be inherited.
+    4. New binding: when assigning the constructor function to a new variable, 'this' binds to the new object variable.
   */
   
   
