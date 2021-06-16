@@ -92,11 +92,48 @@ console.log(fernando.stomach);
           + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
   */
   
- function Car() {
-    
+ function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
+}
+
+Car.prototype.fill = function(gallons){
+  for(let i = 0; i < gallons; i++){
+    this.tank++;
   }
-  
-  
+};
+
+Car.prototype.drive = function(distance){
+  for(let i = 0; i < distance; i++){
+    this.odometer++;
+    if(this.tank != 0){
+      this.tank--;
+    }else{
+      return `I ran out of fuel at ${this.odometer} miles!`
+    }
+  }
+};
+
+const ford = new Car('Ford', 19);
+
+ford.fill(20);
+
+console.log(ford.drive(25));
+
+console.log(ford);
+
+const honda = new Car('Honda', 25);
+
+console.log(honda);
+
+honda.fill(15);
+
+honda.drive(10);
+
+console.log(honda);
+
   /*
     TASK 3
       - Write a Baby constructor subclassing Person.
